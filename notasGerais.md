@@ -91,4 +91,23 @@ _tags:  output, formatting, printf, string, int_
 
 ---
 
+```cpp
+// Forma otimizada de elevar a^n
+long long binpow(long long a, long long b, long long m) {
+    a %= m;
+    long long res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a % m;
+        a = a * a % m;
+        b >>= 1;
+    }
+    return res;
+}
+```
+
+# Quando usar unsigned long long?
+- O problema envolve uma soma que passe de 10^18
+- Riscos de overflow
+
 
