@@ -1,3 +1,5 @@
+// https://cses.fi/problemset/task/1666
+
 #include <bits/stdc++.h>
 #define ull unsigned long long
 using namespace std;
@@ -9,7 +11,6 @@ vector<int> isoladas;
 
 int qtdRoads = 0;
 
-
 void dfs(int u){
   visited[u] = true;
   for(auto v : adj[u]){
@@ -18,6 +19,15 @@ void dfs(int u){
     }
   }
 }
+
+/*
+Ideia principal do código: Explorar uma cidade, 
+e todas as outras cidades que não foram exploradas
+no 1° DFS são cidades não conectadas, então exploramos 
+ela, e indicamos que precisamos de uma rua para conectá-la
+
+Após isso, só ligar a cidade inexplorada à cidade 1 e GG
+*/
 
 int main(){
   // n = cidades, m = ruas

@@ -1,0 +1,1 @@
+Já fiz inúmeros problemas no BeeCrowd, porém só me dei o trabalho de arquivá-los agora, então saiba que o número de problemas resolvidos neste site é, na verdade, muito maior que aparenta

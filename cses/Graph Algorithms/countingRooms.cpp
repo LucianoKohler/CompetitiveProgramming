@@ -1,3 +1,5 @@
+// https://cses.fi/problemset/task/1192
+
 #include <bits/stdc++.h>
 #define ull unsigned long long
 using namespace std;
@@ -7,7 +9,9 @@ bool vis[maxNM][maxNM];
 int n=0, m=0;
 int qtdRooms = 0;
 
+// Movimentos possíveis
 vector<pair<int, int>> moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+
 vector<string> grid(maxNM);
 
 void dfs(int i, int j){
@@ -23,6 +27,13 @@ void dfs(int i, int j){
   }
 }
 
+/*
+Ideia principal: Quando queremos andar em uma grade 2D, criamos um vetor de tuplas 
+chamada "moves", onde guardamos todos os possíveis movimentos em um array para usá-los
+no DFS, aí no problema passamos por cada caractere, se for ".", usamos DFS nele para
+explorar seus arredores e visitar todos os "." vizinhos, e para cada "." inexplorado
+que acharmos no for, indica um quarto totalmente novo, genial!
+*/ 
 int main(){
   cin >> n >> m;
 
@@ -37,7 +48,7 @@ int main(){
         qtdRooms++;
       }
     }
-  }
+  } 
 
   cout << qtdRooms << endl;
 }
