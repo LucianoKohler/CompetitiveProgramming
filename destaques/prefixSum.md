@@ -1,4 +1,12 @@
 # Prefix sum
+
+Complexidade: 
+- Construção: **O(n)**
+- Consulta: **O(1)**
+- Memória: **O(n)**
+
+---
+
 Dado um array de valores estático (seus elementos não mudam) de exemplo: 
 `nums[n] = { 3, 2, 4, 5, 1, 1, 5, 3 }`
 
