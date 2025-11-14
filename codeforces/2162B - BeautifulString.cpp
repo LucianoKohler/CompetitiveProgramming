@@ -1,22 +1,9 @@
 // https://codeforces.com/contest/2162/problem/B
 
+// segunda pegadinha do div e a segunda que eu caio...
+
 #include <bits/stdc++.h>
 using namespace std;
-
-bool isPalindrome(string s){
-  size_t l = 0;
-  size_t r = s.length();
-  while(l < r){
-    if(s[l] == s[r]){
-      l++;
-      r--;
-    }else{
-      return 0;
-    }
-  }
-
-  return 1;
-}
 
 int main()
 {
@@ -24,7 +11,25 @@ int main()
     while(n--){
       int m; cin >> m;
       string s; cin >> s;
-      cout << isPalindrome(s);
+      int qtdOnes = 0;
+
+      // Qtt of 1s  
+      for(int i = 0; i < s.length(); i++){
+        if(s[i] == '1'){
+          qtdOnes++;
+        }
+      }
+
+      cout << qtdOnes << endl;
+      if(qtdOnes == 0){ continue; }
+
+      // Removing 1s
+      for(int i = 0; i < s.length(); i++){
+        if(s[i] == '1'){
+          cout << i+1 << " ";
+        }
+      }
+      cout << endl;
     }
     
     return 0;
