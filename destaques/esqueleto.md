@@ -11,6 +11,9 @@ Complexidade:
 
 Descrição/observações do algoritmo
 
+
+### Problema Relacionado e Código do Algoritmo
+
 ```cpp
 // Função
 int nomeFuncao(){
