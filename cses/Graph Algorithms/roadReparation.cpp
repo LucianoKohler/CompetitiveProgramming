@@ -1,4 +1,4 @@
-// https://cses.fi/problemset/task/1676
+// https://cses.fi/problemset/task/1675
 
 #include <bits/stdc++.h>
 #define ll unsigned long long
@@ -62,5 +62,4 @@ int main(){
     }else{
         cout << sum << endl;
     }
-
-}
+} 
