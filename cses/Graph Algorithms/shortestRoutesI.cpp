@@ -1,5 +1,5 @@
 // https://cses.fi/problemset/task/1671
-//REVISAR
+
 #include <bits/stdc++.h>
 #define ll unsigned long long
 using namespace std;
