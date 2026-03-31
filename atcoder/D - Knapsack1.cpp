@@ -65,7 +65,7 @@ int main(){
     int n, capacity; cin >> n >> capacity;
     for(int i = 0; i < n; i++) cin >> weight[i] >> value[i];
     
-    solve(n, capacity);
+    wsolve(n, capacity);
     
     return 0;
 }
