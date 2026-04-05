@@ -6,7 +6,12 @@ Complexidade:
 - Memória: **O(4*n)**
 
 ![Representação da seg tree](image.png)
-<p align='center'>(Fonte: Competitive Programmer's Handbook)[https://cses.fi/book/book.pdf]</p>
+
+<div align="center">
+
+Fonte: [Competitive Programmer's Handbook](https://cses.fi/book/book.pdf)
+
+</div>
 
 Seg Tree é a **GOAT das estruturas de dados** para *range queries*, pois, ao contrário do prefix sum, que calcula o range da soma entre dois pontos (a, b) de um vetor, a seg tree nos possibilita:
 
@@ -27,4 +32,4 @@ A seg tree, mesmo chamada de tree, é, muitas da vezes, representada por um veto
 
 ### Problema Relacionado e Código do Algoritmo
 
-Veja: segTree.cpp
+Veja: [segTree.cpp](https://github.com/LucianoKohler/CompetitiveProgramming/blob/main/destaques/segTree/segTree.cpp)

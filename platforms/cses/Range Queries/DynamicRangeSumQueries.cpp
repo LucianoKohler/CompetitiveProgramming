@@ -46,7 +46,7 @@ ll sum(int v, int l, int r, int L, int R){
     }
 
     // Partially out of range, return both ways
-    int mid = (l + r)/2; 
+    int mid = (l + r)/2;
     ll leftQuery  = sum(2*v, l, mid, L, R);
     ll rightQuery = sum (2*v+1, mid+1, r, L, R);
 
