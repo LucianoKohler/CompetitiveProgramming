@@ -40,7 +40,7 @@ A temporary folder to store contest code, it should usually be empty, if it isn'
 A sad place where I keep failed problems from contests, I might solve them one day, or just leave them there, idk, time will tell...
 
 ---
+<b>Code your problems away 🫵</b>
 
 <p align='center'>
-<b>Code your problems away 🫵</b>
 </p>
