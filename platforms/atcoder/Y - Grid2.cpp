@@ -67,7 +67,7 @@ sendo 3 e 4 adotados
 3 * 3^-1 = 1 (mod 4)
 3^-1 = 3, pois 3 * 3 = 9 que mod 4 = 1 (crazy)
 
-Teorema de 
+Pequeno Teorema de Fermat   
 
 p = valor do mod
 a = nosso n
