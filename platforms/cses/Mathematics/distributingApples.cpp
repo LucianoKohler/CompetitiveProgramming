@@ -1,22 +1,13 @@
-// https://cses.fi/problemset/task/1079
+// https://cses.fi/problemset/task/1716/
+
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
 const ll modulo = 1e9+7;
-const int mx = 1e6+5; // This varies!
+const int mx = 2e6+5; // This varies!
 
-/*
-We can't do divisions in modular arithmetic, to do so, we need the modular inverse, since
-multiplying by the inverse of a number implies dividing the number by such number.
-
-having mod = 1e9+7 and a = 5, for example, by Fermat's Little Theorem, the modular inverse 
-of a equals 5 * 5^(1e9+5) ( = 1 )
-
-We'll use binExp to get that crazy number
-*/
-
-ll fat[mx];
-ll invFat[mx];
+ll fat[mx+1];
+ll invFat[mx+1];
 
 ll binExp(ll a, ll b){
     ll ans = 1;
@@ -41,25 +32,14 @@ void preCalcFactorial(ll n){
         fat[i] = ans;
     }
 
-    // Calculate invFats
+    // Calculate invFats (note that i/i! = invFat[i-1])
     invFat[n] = binExp(fat[n], modulo-2);
     for(int i = n; i > 0; i--){
         invFat[i-1] = (i * invFat[i]) % modulo;
     }
 }
 
-/*
-invFat[i] = 1/i!
-invFat[i-1] = i/i!
-
-*/
-
-ll binCoef(ll n, ll k){
-    /*
-        n!
-    k! * (n-k)!
-    */
-
+ll binCoef(ll n, ll k){ // nCk (n choose k)
     ll ans = (fat[n] * invFat[k]) % modulo;
     ans = (ans * invFat[n-k]) % modulo;
     return ans;
@@ -68,13 +48,16 @@ ll binCoef(ll n, ll k){
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
 
-    // Pre-calculate all factorials and inverses
+    // Pre-calculate all factorials and inverses (MAYBE NOT NEEDED)
     preCalcFactorial(mx);
 
-    int n; cin >> n;
-    while(n--){
-        ll a, b; cin >> a >> b;
-        cout << binCoef(a, b)  << "\n";
-    }
+    ll n, k; cin >> n >> k; // n children and k apples
+    /*
+    Imagine the bars, if we have 3 children,we need
+    2 bars to divide the apples inthree groups, 
+    therefore, we want to choose k-1 bars in n+k-1 elements
+    !!! 
+    */
+    cout << binCoef(n+k-1, k-1) << endl;
     return 0;
 }
