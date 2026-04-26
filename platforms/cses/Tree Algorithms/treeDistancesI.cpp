@@ -41,7 +41,7 @@ int main(){
 
 }
 
-int bfs(int v){
+int bfs(int v){ 
     vector<int> visited(mx, 0);
     int analisado;
     queue<int> q;
@@ -50,7 +50,7 @@ int bfs(int v){
 
     while(!q.empty()){
         analisado = q.front();
-            q.pop();
+        q.pop();
         for(auto child : adj[analisado]){
             if(!visited[child]){
                 visited[child] = 1;

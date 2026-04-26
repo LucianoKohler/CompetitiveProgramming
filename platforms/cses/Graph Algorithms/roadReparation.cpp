@@ -51,7 +51,7 @@ int main(){
 
     sort(roads.begin(), roads.end());  
 
-    for(int i = 0; i < roads.size(); i++){
+    for(int i = 0; i < roads.size(); i++){  
         auto [cost, start, finish] = roads[i];
         sum = unionDSU(start, finish, sum, cost);
         if(qtdComponents == 1) break;

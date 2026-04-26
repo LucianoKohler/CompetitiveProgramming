@@ -4,7 +4,7 @@ using namespace std;
 #define ll long long
 #define mx 2e5+4
 
-vector<ll> nums(mx, 0);
+vector<ll> nums(mx, 0);     
 vector<ll> seg(4*mx, 0);
 
 void build(int v, int l, int r){
