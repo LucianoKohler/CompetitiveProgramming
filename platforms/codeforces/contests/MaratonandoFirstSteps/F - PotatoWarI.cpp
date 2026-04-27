@@ -18,7 +18,7 @@
 -=########===-.                      .
 -=##########==--.                       
 ===#####=======--..             
-*/        
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -27,25 +27,27 @@ const int mx = 2e5+5; // This varies!
 
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
-    int n; cin >> n;
-    vector<int>figs(n, 0);
-    for(int i = 0; i < n; i++) cin >> figs[i];
-    
-    // Achando T maximo
-    int mT = 0;
-    vector<int>clone = figs;
-    sort(clone.begin(), clone.end());
-    for(int i = 0; i < n; i++){
-      if(clone[i] == mT+1){
-        mT++;
-      }
-    }
-
-    if(mT == 0){
-      cout << "-1" << endl;
+    int t, tD, c, cD; cin >> t >> tD >> c >> cD;
+    if(t > c){
+      cout << "0\n";
       return 0;
     }
 
+    if(tD <= cD){
+      cout << "-1\n";
+      return 0;
+    }
 
+    int sumT = t;
+    int sumC = c;
+    int days = 0;
+
+    while(sumT <= sumC){
+      sumT+=tD;
+      sumC+=cD;
+      days++;
+    }
+
+    cout << days << "\n";
     return 0;
 }
