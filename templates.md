@@ -50,10 +50,17 @@
 using namespace std;
 #define ll long long
 const ll modulo = 1e9+7;
-const int mx = 2e5+5; // This varies!
+const int mx = 2e5+5;
+
+void solve(){
+    // Code...
+
+}
 
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--) solve();
 
     return 0;
 }
@@ -127,11 +134,17 @@ ll binCoef(ll n, ll k){ // nCk (n choose k)
     return ans;
 }
 
+void solve(){
+    // Code...
+    
+}
+
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
 
-    // Pre-calculate all factorials and inverses (MAYBE NOT NEEDED)
-    preCalcFactorial(mx); 
+    preCalcFactorial(mx); // See if needed
+    int t; cin >> t;
+    while(t--) solve();
 
     return 0;
 }

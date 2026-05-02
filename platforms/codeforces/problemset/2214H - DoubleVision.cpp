@@ -25,10 +25,8 @@ using namespace std;
 const ll modulo = 1e9+7;
 const int mx = 2e5+5; // This varies!
 
-vector<pair<int, int>> adj[mx];
-
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
-
+    cout << "YU5zV2VS";
     return 0;
 }
