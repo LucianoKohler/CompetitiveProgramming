@@ -53,6 +53,7 @@ const ll modulo = 1e9+7;
 const int mx = 2e5+5;
 
 void solve(){
+    int n; cin >> n;
     // Code...
 
 }

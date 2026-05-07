@@ -4,6 +4,20 @@ using namespace std;
 #define ll long long
 const ll modulo = 1e9 + 7;
 const int mx = 2e5 + 5; // This varies!
+vector<int> nums(mx, 0);
+
+int maxChangesFrom(int l, int r){
+  int qtd = 0;
+  int lastVal = nums[l];
+  for(int i = l; i <= r; i++){
+    if(nums[i] != lastVal){
+      lastVal = nums[i];
+      qtd++;
+    }
+  }
+
+  return qtd;
+}
 
 int main()
 {
@@ -14,32 +28,12 @@ int main()
   {
     int n, k;
     cin >> n >> k;
-    vector<int> nums(n);
     for (int i = 0; i < n; i++) cin >> nums[i];
     int s; cin >> s; s--;
-    int x = nums[s];
-    int qtdMoves = 0;
-    
-    cout << qtdMoves << "\n";
+
+    int ans = max(maxChangesFrom(0, s), maxChangesFrom(s, n-1));
+    if(ans % 2 == 1) ans++;
+    cout << ans << "\n";
   }
   return 0;
 }
-/*
-0 1 0 1 0 1
-3
-    
-0 1 0 1 0 1
------------
-0 1 1 0 1 0
-0 0 0 1 0 0
-0 0 1 0 0 0
-0 0 0 0 0 0
-    
-        V
-0 1 1 0 1 1 0 1 0 0 1 0 1 0 1 0 1
-
-0 1 1 1 1 1 0 1 0 0 1 0 1 0 1 0 1
-
-*/
-
-
