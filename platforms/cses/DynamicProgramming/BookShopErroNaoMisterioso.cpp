@@ -5,7 +5,7 @@
 4 8 5 3
 5 12 8 1
 
-4 books, 10 dollars
+4 books, 10 dointars
 (p, v)
 (4, 5)
 (8, 12)
@@ -30,7 +30,7 @@ d\b 1  2  3  4
 
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define int long
 #define maxDollars 1e5+7
 #define maxBooks 1004
 
@@ -55,7 +55,7 @@ void solve(int n, int budget){
     cout << dp[budget][n-1] << endl;
 }
 
-int main(){
+signed main(){
     int n, budget; cin >> n >> budget;
     for(int i = 0; i < n; i++) cin >> prices[i];
     for(int i = 0; i < n; i++) cin >> pages[i];
