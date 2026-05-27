@@ -15,13 +15,11 @@ int main(){
     // PRE-CALCULATE THE BINARY LIFTING
     for(int i = 1; i < mLog; i++){
         for(int j = 1; j < mx; j++){
-            /* INSIGHT TIME :sparkles:
+            /* INSIGHT TIME
                 If we were on planet 1 and wanted to take 7 teleporters, we would, using binary lifting:
                 - Use 4 teleporters
                 - Use 2 teleporters
                 - Use 1 teleporter
-                Here, we always start by "taking" 2^30 teleporters, but since these are 0, they'll stay like that
-                When we get to a lift that has values tho (ex: 4, 2, 1), we then use the values of those
             */
             binLift[i][j] = binLift[i-1][binLift[i-1][j]];
         }
