@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-// DO NOT COPY ABOVE LINES 
+// DO NOT COPY ABOVE LINES (still need to be in your code tho)
 
 struct BIT {
     int n;

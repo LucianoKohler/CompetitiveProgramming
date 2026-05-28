@@ -2,44 +2,66 @@
 using namespace std;
 #define ll long long
 const ll modulo = 1e9+7;
-const int mx = 1e5+4;
-vector<ll> dists(mx, 1e18);
-vector<ll> explored(mx, 0);
-vector<pair<ll, ll>> adj[mx];
+const int mx = 501;
+ll dists[mx][mx];
+ll adj[mx][mx];
+int n;
+
+void floydWarshall(){
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= n; j++){
+            if(i == j)              dists[i][j] = 0;
+            else if(adj[i][j] != 0) dists[i][j] = adj[i][j];
+            else                    dists[i][j] = 1e18;
+        }
+    }
+
+    for(int k = 1; k <= n; k++){
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n; j++){
+                dists[i][j] = min(dists[i][j], dists[i][k] + dists[k][j]);
+            }
+        }
+    }
+
+}
 
 int main(){
     cin.tie(0)->sync_with_stdio(0);
-    ll n, m; cin >> n >> m;
-    for(int i = 0; i < m; i++){
-        ll a, b, c; cin >> a >> b >> c;
-            adj[a].push_back({b, c});
-        }
 
-        // Dijkstra
-        dists[1] = 0;
-        priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<>>pq;
-        pq.push({0, 1});
-        while(!pq.empty()){
-            ll city = pq.top().second; pq.pop();
-            if(explored[city]) continue;
-            explored[city] = 1;
-            for(auto flight : adj[city]){
-                ll destiny = flight.first;
-                ll weight = flight.second;
-                
-                dists[destiny] = min(dists[destiny], dists[city]+weight);
-                pq.push({dists[destiny], destiny});
+    ll m, q; cin >> n >> m >> q;
+    for(int i = 0; i < m; i++){
+        ll a, b, w; cin >> a >> b >> w;
+            if(adj[a][b] == 0){       
+                adj[a][b] = w;
+                adj[b][a] = w;
+            }else if(adj[a][b] > w){ // Overwrite if we have more than 1 roads
+                adj[a][b] = w;
+                adj[b][a] = w;
             }
         }
 
-        for(int i = 1; i < n+1; i++){
-            cout << dists[i] << " ";
-        }
+    floydWarshall();
 
+    while(q--){
+        int a, b; cin >> a >> b;
+        if(dists[a][b] == 1e18) cout << "-1\n";
+        else                    cout << dists[a][b] << "\n";
+    }
     return 0;
 }
 
 /*
+5 6 0
+1 2 5
+2 3 2
+3 4 7
+4 5 2
+4 1 9
+5 1 1
+*/
+
+/* que porra é essa? Ass. Luciano do futuro lendo o código do luciano do passado
 0,0,0,0,1,0,1,0,0,1,1,0,1,1,0,1,0,1,1,1,1,1,1,1,1
 0,0,0,1,1,1,1,0,0,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1,1
 0,0,0,0,0,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,0,1,0,0,1
