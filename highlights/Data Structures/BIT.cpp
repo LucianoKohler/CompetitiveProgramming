@@ -7,7 +7,7 @@ struct BIT {
     int n;
     vector<ll>nums;
     vector<ll>bit;
-
+    
     // Constructor with n (uses member initialization)
     BIT(int n) : n(n), nums(n, 0), bit(n+1, 0) { }
 
@@ -40,3 +40,5 @@ struct BIT {
         add(k, v-nums[k-1]);
     }
 };
+
+// Create by using "BIT name(param)"
