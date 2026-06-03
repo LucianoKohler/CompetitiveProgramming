@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/469/A
 #include<bits/stdc++.h> 
 
 int main()
