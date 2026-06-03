@@ -1,26 +1,26 @@
-# Prefix sum
+# Prefix Sum
 
-Complexidade: 
-- Construção: **O(n)**
-- Consulta: **O(1)**
-- Memória: **O(n)**
+Complexity: 
+- Pre-processing: **O(n)**
+- Query: **O(1)**
+- Memory: **O(n)**
 
 ---
 
-Dado um array de valores estático (seus elementos não mudam) de exemplo: 
+Given an array of static values (they never change), for example:
+
 `nums[n] = { 3, 2, 4, 5, 1, 1, 5, 3 }`
 
-Se queremos saber a soma dos valores entre "a" e "b", podemos fazer, para cada soma, um laço de repetição que passa pelos valores e soma os valores em uma variável acumuladora. Essa solução é O(N²), e quebra nos casos absurdos, é então, que o **prefix sum** entra em cena.
-
-Para cada valor lido, temos um outro array "sum" que salva a soma de todos os valores de 0 a n, veja o exemplo:
+If we want to get the sum of values between the positions "a" and "b" from the array, we can, for each sum, loop through the array and sum each value cumulatively and save them on a **prefix** array, where each position **i** saves the sum from element 1 to **i**. Take a look:
 
 | nums | 3 | 2 | 4 | 5  | 1  | 1  | 5  | 3  |
 |------|---|---|---|----|----|----|----|----|
-| sum  | 3 | 5 | 9 | 14 | 15 | 16 | 21 | 24 |
+| pref | 3 | 5 | 9 | 14 | 15 | 16 | 21 | 24 |
 
-Assim, para conceber a soma do intervalo a até b, podemos simplesmente retornar **sum[b-1] - sum[a-2]**, elegantemente de forma O(1).
+With this vector, we can efficiently calculate the sum of interval "a" to "b" by returning `pref[b-1] - pref[a-2]` in O(1).
 
-### Problema Relacionado e Código do Algoritmo
+
+### Related Problem and Algorithm's Code
 ```cpp
 // https://cses.fi/problemset/1646/
 
@@ -30,27 +30,27 @@ using namespace std;
  
 int main()
 {
-    int tam, queries; // T
-    cin >> tam >> queries;
-    ll nums[tam];
-    ll sum[tam];
+    int n, queries; // Size of the array and number of queries
+    cin >> n >> queries;
+    ll nums[n];
+    ll pref[n];
 
-    for(int i = 0; i < tam; i++){
+    for(int i = 0; i < n; i++){
         cin >> nums[i];
         if(i==0){
-          sum[i] = nums[i];
+          pref[i] = nums[i];
         }else{
-          sum[i] = sum[i-1] + nums[i];
+          pref[i] = pref[i-1] + nums[i];
         }
     }
     
     while(queries--){
-        int a, b; // Retornar soma de "a" até "b"
+        int a, b; // Return sum from "a" to "b"
         cin >> a >> b;
         if (a == 1){
-          cout << sum[b-1] << endl;
+          cout << pref[b-1] << endl;
         }else{
-          cout << sum[b-1] - sum[a-2] << endl;
+          cout << pref[b-1] - pref[a-2] << endl;
         }
     }
  

@@ -1,57 +1,56 @@
 # Disjoint Set Union (DSU)
 
-Complexidade: 
-- União: **O(1)** (Segue a função de Ackermann)
-- Consulta: **O(1)** (Segue a função de Ackermann)
-- Criação: **O(1)** (Sempre)
+Complexity: 
+- Union: **O(1)** (Follows reverse Ackermann function)
+- Query: **O(1)** (Follows reverse Ackermann function)
+- Pre-processing: **O(1)** (Always)
 
 ---
 
-Na teoria de grafos, conjuntos disjuntos são uma pequena mas forte aplicação que auxilia no controle de quantos componentes (nodos ligados/solitários) existem em um grafo. Para isso, se utiliza a implementação de **parentes** (como em uma árvore), onde dois nodos estão em um mesmo componente se seus pais forem os mesmos.
+On **graph theory**, disjoint sets can help you to keep track of how many **components** (regions of nodes that don't reach another region) exist in a graph. To do so, we use the **parenting** technique (like in a tree), where two nodes are in a same component if their parent is the same.
 
-_Nota: Os nodos raízes tem como pai eles mesmos._
-Em resumo, a DSU consiste em três funções:
+_Note: Root notes have themselves as parents_
 
-- `unite(int nodo, int alvo)`: Une dois nodos (podendo ser nodo para nodo ou nodo para componente) ligando o novo nodo ao pai do alvo
-- `create(int nodo)`: Cria um nodo cujo pai é ele mesmo
-- `find(int nodo)`: Encontra o pai do nodo **(a mais vital!)** 
+In sum, DSU consists of three functions:
+- `unite(int node, int targ)`: Unites two nodes (can be node to node or node tocomponent)
+- `create(int node)`: Creates a node that is parented to itself
+- `find(int node)`: Finds a node's parent **(the most important!)** 
 
-O algoritmo tem o termo "Disjoint" pois cada elemento pertence somente a um agrupamento.
+We also need to keep track of the size of the components to optimally find the best way to unite the nodes
 
 ---
 
-### Problema Relacionado e Código do Algoritmo
+### Related Problem and Algorithm's Code
 
 ```cpp
 // https://cses.fi/problemset/task/1676
 
-// Contando que os dados são salvos de maneira:
-int pai[n];
-int tam[n];
+// parent of each node, size of the node's component
+int parent[n];
+int size[n];
 
-// Cria um novo componente
 void create(int nodo){
-    pai[nodo] = nodo;
-    tam[nodo] = 1;
+    parent[nodo] = nodo;
+    size[nodo] = 1;
 }
 
-// Encontra o pai de um nodo
 int find(int nodo){
-    if(nodo == pai[nodo]) return nodo;
-  return pai[nodo] = find(pai[nodo]); 
-  // Retorna o pai E reorganiza a árvore para o melhor caso da DSU
+    if(nodo == parent[nodo]) return nodo;
+    parent[nodo] = find(parent[nodo]);
+    return parent[nodo];
+   // Returns the parent AND updates the parent of a node to improve efficiency
 }
 
 int unionDSU(int nodo, int alvo){
     int a = find(nodo);
     int b = find(alvo);
 
-    if(a == b) return; // Já são unidos
-    if(tam[a] < tam[b]) swap(a, b); // otimização
+    if(a == b) return; // Already united
+    if(size[a] < size[b]) swap(a, b); // Optimization: The biggest component joins to the smallest
 
-    pai[b] = a;
-    tam[a] += tam[b];
+    parent[b] = a;
+    size[a] += size[b];
 }
 ```
 
-**Importante**: É fácil implementar uma variável "qtdComponentes" para guardar quantos elementos separados ainda existem, pois é só decrementá-la para cada união (válida!).
+**Important**: It is easy to implement a variable "qtdComponents" to keep track of how many components the graph has, since you just need to decrement it for each valid union.

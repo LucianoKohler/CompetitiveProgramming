@@ -1,35 +1,35 @@
-# Seg Tree
+# Segmented Tree
 
-Complexidade: 
-- Processamento (update e sum): **O(log n)**
-- Construção: **O(n)**
-- Memória: **O(4*n)**
+Complexity: 
+- Processing (updating and querying): **O(log n)**
+- Pre-processing: **O(n)**
+- Memory: **O(4*n)**
 
-![Representação da seg tree](image.png)
+![seg tree representation](image.png)
 
 <div align="center">
 
-Fonte: [Competitive Programmer's Handbook](https://cses.fi/book/book.pdf)
+Source: [Competitive Programmer's Handbook](https://cses.fi/book/book.pdf)
 
 </div>
 
-Seg Tree é a **GOAT das estruturas de dados** para *range queries*, pois, ao contrário do prefix sum, que calcula o range da soma entre dois pontos (a, b) de um vetor, a seg tree nos possibilita:
+The Segmented Tree is the a **great** data structure to efficiently calculate **range queries**, because, contrary to the prefix sum, which needs to keep the array static, we can:
 
-- Calcular MUITAS outras coisas diferentes, como **min, max, e bitwise operations**
-- Atualizar valores sem custo excessivo de tempo (as chamadas *dynamic queries*)
+- Calculate many other things other than sums like **minimum, maximum and bitwise operations** in a range
+- Update values without excessive time cost (called *dynamic queries*)
 
-# Estrutura
+# Structure
 
-A seg tree, mesmo chamada de tree, é, muitas da vezes, representada por um vetor de tamanho **4*n**, onde temos, para cada elemento k:
+The segmented tree, although called tree, is, most of the time, represented by a vector of size **4*n**, where we have, for each element:
 
-- `filhoEsq(k) = tree[2k]` 
-- `filhoDir(k) = tree[2k+1]`
-- `pai(k) = tree[k/2]`
+- `leftChild(k) = tree[2k]` 
+- `rightChild(k) = tree[2k+1]`
+- `parent(k) = tree[k/2]`
 
-**Nota: k/2 = floor(k/2), mas int já trunca pra baixo*
+**Note: k/2 = floor(k/2), but int truncates it already*
 
 ---
 
-### Problema Relacionado e Código do Algoritmo
+### Related Problem and Algorithm's Code
 
-Veja: [segTree.cpp](https://github.com/LucianoKohler/CompetitiveProgramming/blob/main/destaques/segTree/segTree.cpp)
+The code is really big, so refer to [segTree.cpp](https://github.com/LucianoKohler/CompetitiveProgramming/blob/main/destaques/segTree/segTree.cpp)

@@ -1,72 +1,68 @@
 # Dijkstra
 
-Complexidade: 
-- Processamento: **O((N + M) * log N)**
-- Memória: **O(N + M)**
+Complexity: 
+- Processing: **O((N + M) * log N)**
+- Memory: **O(N + M)**
 
-_Sendo **N** a quantidade de nodos e **M** a quantidade de arestas_
+_Where **N** is the qtd. of nodes and **M** is the qtd. of edges_
 
 ---
 
-_Nota: É recomendado ver uma exemplificação prática do que é um algoritmo de caminho mínimo, para isso, [Esse vídeo me ajudou de monte](https://www.youtube.com/watch?v=EFg3u_E6eHU&t=384s)_.
+_Note: It is recommended to see a graphic illustration of the algorithm, to do so, [This video can help a lot!](https://www.youtube.com/watch?v=EFg3u_E6eHU&t=384s)_
 
-Na implementação de grafos, Dijkstra é um **algoritmo que procura um caminho mínimo** entre um nodo A para um nodo B quando os nodos possuem peso.
+On a **weighted graph problem**, Dijkstra is a **Shortest path algorithm** between a node A to a node B
 
-Sua implementação é muito mais entendível quando vista visualmente, mas em resumo, dado um conjunto de:
-* Nodos (como por exemplo, cidades ou localidades)
-* Arestas pesadas (como or exemplo, o tempo de viagem da cidade A para a B)
+Its implementation is greatly understandable when seen visually, but in sum, given a set of:
+- Nodes (e.g. cities or computer in a network)
+- Weighted Edges (e.g. time to travel from city A to B) 
 
-Podemos encontrar uma rota otimizada por meio da criação de um vetor de _distâncias de A_ que, de aresta em aresta, vai dizendo o custo mínimo que levaria para ir do ponto A ao ponto X (não necessariamente o nodo alvo B)
+We can find an optmized route with the use of a vector called **distances from A** (or`dist[]`), that, from edge to edge, updates certain values that say what is the minimum cost to go from node A to a node X (Not necessarily to node B)
 
-Tome de exemplo este grafo direcionado e ponderado:
+Take this weighted directed graph as an example:
 
-![Grafo visualmente](graph.png)
+![Grafo visually](graph.png)
 
-Se iniciarmos do nodo 1, temos a tabela de _distâncias de 1_, que indica a distância de cada nodo em relação ao nodo 1:
+If we start at node 1, we have the table `dist[]` which saves the distances from node 1 to all other nodes:
 
 | Nodo | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10|
 |------|---|---|---|---|---|---|---|---|---|---|
 | Dist | 0 | 5 | 9 | 18| 22| 10| 14| 23| 27|31 |
 
 
-Pequenas implementações são utilizadas para o algoritmo, como **Filas de Prioridade** para otimizar a escolha de arestas (optando pelas mais baratas primeiro) e duas matrizes: de **adjacência** e de **distância**:
-
+Small implementations are used in the algorithm, such as **priority queues** to optimize edge choosing (using cheaper travel costs is always better) and two vectors: `adj[]` and `dist[]`
 
 ```cpp
 
-// Assumindo uma arquitetura de adjacências do tipo:
+// Saving the graph as an adjacency list:
 vector<pair<ll, int>>adj[n];
-vector<ll>dist(n,inf);
+vector<ll>dist(n, 1e18); // All values must start at infinity/big value
 
-/* EXEMPLO 
+/* EXAMPLE 
 adj[1] = {(6, 2), (2, 3), (4, 3)}
 adj[2] = {}
 adj[3] = {(3, 2)}
-Onde cada par é um voo do tipo (tempo de voo, destino)
+Where each pair is a flight of type (time to travel, destiny)
 */
 
-void dijkstra(int inicial, int final){
+void dijkstra(int start){
     
-    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> pq;
-    // Para indicar à pq que a ordem é do menor para o maior, precisamos passar esse segundo parâmetro obrigatoriamente
+    priority_queue<pair<ll, int>> pq;
+    // priority queues prioritize greater values, but since we need to use the smallest edge, we can just pass 
+    // The distances as negative values
 
-    pq.emplace(0, inicial);
+    pq.emplace(0, start);
     while(!pq.empty()){
-        auto [custo, atual] = pq.top();
+        auto [cost, current] = pq.top();
         pq.pop();
 
-        if(minDist[atual] != custo) continue;
-        // Se for encontrada outra forma de se chegar no nodo, pula, pois pela natureza da pq, a primeira aresta já será a melhor por ser a de menor custo
-
-        for(auto [tempo, destino] : adj[atual]){
-            if(custo + tempo < minDist[destino]){
-                // Otimização encontrada!
-                minDist[destino] = custo + tempo;
-                pq.emplace(minDist[destino], destino);
+        for(auto [time, destiny] : adj[current]){
+            if(cost + time < dist[destiny]){
+                // Found an optmization!
+                dist[destiny] = cost + time;
+                pq.emplace(-dist[destiny], destiny);
             }
         }
     }
 }
-
-// Nota: há um código com um problema implementado no arquivo dijkstra.cpp para viualizar as declarações e setups.
 ```
+**the neighbor file `dijkstra.cpp` has a cleaner code, and an example to test it**

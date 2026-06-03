@@ -1,36 +1,26 @@
-// Problema relacionado: https://cses.fi/problemset/task/1671
+// Related Problem: https://cses.fi/problemset/task/1671
 
 #include <bits/stdc++.h>
 #define ll unsigned long long
 using namespace std;
-const int mx = 1e5+3; // Limite de x
-const ll inf = 1e18; // Valor "infinito" para encher o vetor de distâncias
-
+const int mx = 1e5+3;
+const ll inf = 1e18;
 vector<pair<ll, int>>adj[mx];
-vector<ll>dist(mx,inf);
 
-/*
-adj[1] = {(6, 2), (2, 3), (4, 3)}
-adj[2] = {}
-adj[3] = {(3, 2)}
-Onde cada par é um voo do tipo (tempo de voo, destino)
-*/
+vector<ll>dist(mx, inf);
+void dijkstra(int start){
+    
+    priority_queue<pair<ll, int>> pq;
 
-void dijkstra(int inicial, int final){
-    // Para indicar à pq que a ordem é do menor para o maior, precisamos passar esse segundo parâmetro obrigatoriamente
-    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> pq;
-    pq.emplace(0, inicial);
+    pq.emplace(0, start);
     while(!pq.empty()){
-        auto [custo, atual] = pq.top();
+        auto [cost, current] = pq.top();
         pq.pop();
 
-        // Se for encontrada outra forma de se chegar no nodo, pula, pois pela natureza da pq, a primeira aresta já será a melhor por ser a de menor custo
-        if(dist[atual] != custo) continue;
-
-        for(auto [tempo, destino] : adj[atual]){
-            if(custo + tempo < dist[destino]){
-                dist[destino] = custo + tempo;
-                pq.emplace(dist[destino], destino);
+        for(auto [time, destiny] : adj[current]){
+            if(cost + time < dist[destiny]){
+                dist[destiny] = cost + time;
+                pq.emplace(-dist[destiny], destiny);
             }
         }
     }
@@ -38,26 +28,27 @@ void dijkstra(int inicial, int final){
 
 int main(){
     
-    cout << "Insira o input padronizado (o fim do codigo tem um): ";
+    cout << "Insert the formatted input (end of code has one): ";
     int n, m; cin >> n >> m;
     for(int i = 0; i < m; i++){
-        // Cidade inicial, cidade final, custo de viagem
-        int a, b, c; cin >> a >> b >> c;
-        adj[a].push_back({c, b});
+        // Starting city, ending city, travel cost
+        int a, b, w; cin >> a >> b >> w;
+        adj[a].push_back({w, b});
     }
-    int inicial = 1;
-    int alvo = 1;
+    int initial = 1;
+    int target = 10;
 
-    cout << "Insira os nodos de inicio e chegada: ";
-    cin >> inicial >> alvo;
+    cout << "Insert the start and end nodes: ";
+    cin >> initial >> target;
 
-    dist[inicial] = 0;
+    dist[initial] = 0;
 
-    dijkstra(inicial, alvo);
-    cout << "Custo para chegar ao destino: " << dist[alvo] << " ";
+    dijkstra(initial);
+
+    cout << "Cost to reach selected node: " << dist[target] << " ";
 }
 
-/* Input válido para o problema:
+/* Valid input for the code:
 10 16
 7 5 8
 5 1 8
