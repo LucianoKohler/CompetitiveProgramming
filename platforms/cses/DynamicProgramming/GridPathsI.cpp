@@ -1,5 +1,4 @@
 // https://cses.fi/problemset/task/1638
- 
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
@@ -40,5 +39,3 @@ int main(){
   solve(n);
  
 }
-
-// MLE  
