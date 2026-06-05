@@ -1,24 +1,4 @@
-/*
-    .                           .....   
-    .--.    B L O C K I E R    -----...
-    ...--.                . .-=---.....
-     ...----==###==#####==###==-. .....
-      -===###=-=#=-=####=-----##==.. .. 
-      -=-   .-#======##==-.--=-   .-. .
-     .==  .    .###=###=-=-=- .    -.. 
-    .==-       .--===##====--      ..-.
-  ..==#-.     ==--====###===--=.  ..--..
- ..-====##===##===============--====-...
- ..-=========######======--- ...==-----.
-  .-==========#####==....        =---...
-....====-===#=######.           .=---. 
-. .-====--=#########=--.        ----=-. 
-...-###=========--------.     ===--..-.
-..######=#===---....            ==--...
--=########===-.                      .
--=##########==--.                       
-===#####=======--..             
-*/        
+// https://cses.fi/problemset/task/3359/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -28,6 +8,12 @@ bool dp[mx][mx]; // Saves marks on letters
 string grid[mx];
 string ans;
 int n;
+
+/* 
+General Idea: work with diagonals, and for each idagonal, paint (use a bool dp[][]) the numbers
+that could make an optimal path, at the end, it is guaranteed that only 1 is the true minimal, and if
+there are more than one, we can pick any of them.
+*/
 
 void checkDiagonal(int diagonal){
     if(diagonal == 0){
@@ -79,7 +65,7 @@ void solve(){
     cin >> n;
     for(int i = 0; i < n; i++) cin >> grid[i];
 
-    // Build the DP
+    // Build the DP and the ans
     for(int diag = 0; diag < 2*n-1; diag++){
         checkDiagonal(diag);
     }
