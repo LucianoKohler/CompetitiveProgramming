@@ -1,4 +1,4 @@
-// https://codeforces.com/group/4QT6JKdRZ8/contest/518512/problem/D 
+// https://codeforces.com/group/4QT6JKdRZ8/contest/526955/problem/D
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -6,10 +6,7 @@ const ll modulo = 1e9+7;
 const int mx = 2e5+5;
 
 void solve(){
-    int n, hp; cin >> n >> hp;
-    
-    
-    
+    int n; cin >> n;
 
 }
 

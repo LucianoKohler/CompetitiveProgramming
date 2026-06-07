@@ -1,23 +1,28 @@
+// https://codeforces.com/problemset/problem/2009/C
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+const ll modulo = 1e9+7;
+const int mx = 2e5+5;
 
-int main()
-{
-    int n; cin >> n;
-    long long x, y, k;
-    while(n--){
-        cin >> x >> y >> k;
+void solve(){
+    double x, y, k; cin >> x >> y >> k;
+    ll qtdXjumps = ceil(x/k);
+    ll qtdYjumps = ceil(y/k);
+    
+    // We need to account waiting moves (if we reached target x but not target y for example)
+    ll waitingMoves = max(qtdXjumps, qtdYjumps) - min(qtdXjumps, qtdYjumps);
 
-        long long moves = (x+y)/k;
+    if(qtdXjumps > qtdYjumps) waitingMoves--;
 
-        if ((x+y) %k != 0){
-            moves++;
-        }
+    cout << qtdXjumps + qtdYjumps + waitingMoves << "\n";
+}
 
-        
-        cout << moves << endl;
-        }
+int main(){
+    cin.tie(0) -> sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--) solve();
+
     return 0;
 }
 
-// Espero que o mundo todo exploda e foda-se

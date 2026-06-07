@@ -54,7 +54,6 @@ const int mx = 2e5+5;
 
 void solve(){
     int n; cin >> n;
-    // Code...
 
 }
 
@@ -136,7 +135,6 @@ ll binCoef(ll n, ll k){ // nCk (n choose k)
 }
 
 void solve(){
-    // Code...
     
 }
 

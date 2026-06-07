@@ -7,8 +7,6 @@ const int mx = 2e5+5;
 vector<int>adj[mx];
 vector<bool>explored(mx, 0);
 
-
-
 void solve(){
     int n, m; cin >> n >> m;
     for(int i = 0; i < m; i++){
