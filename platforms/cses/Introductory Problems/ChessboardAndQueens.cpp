@@ -24,47 +24,65 @@ using namespace std;
 #define ll long long
 const ll modulo = 1e9+7;
 const int mx = 2e5+5;
+vector<string>grid(8, "");
+ll ways = 0;
 
-void solve(){
-    ll totalWays = (64*63)/2;
-
-    ll wrongWays[8][8] = 
-    {
-        21, 21, 21, 21, 21, 21, 21, 21,
-        21, 23, 23, 23, 23, 23, 23, 21,
-        21, 23, 25, 25, 25, 25, 23, 21,
-        21, 23, 25, 27, 27, 25, 23, 21,
-        21, 23, 25, 27, 27, 25, 23, 21,
-        21, 23, 25, 25, 25, 25, 23, 21,
-        21, 23, 23, 23, 23, 23, 23, 21,
-        21, 21, 21, 21, 21, 21, 21, 21
-    };
-
-/*
-64 63 2 = 2016
-21 + 23 + 23 = 67
-.*******
-**.*****
-*.******
-********
-********
-********
-********
-********
-checkVertical(), etc...
-Simulate ^^^^^^^^
-*/
-
-    ll wrongs = 0;
+void placeOn(int row, int col){
+    
+    // Bad cases
+    // Occupied slot
+    if(grid[row][col] == '*') return;
+    
+    // Attacking from top or bottom
     for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            char c; cin >> c;
-            if(c == '.') wrongs += wrongWays[i][j];
+        if(grid[i][col] == 'X') return;
+    }
+
+    // Attacking from main diagonal
+    for(int i = 0; i < 8; i++){
+        if(col-row+i < 0 || col-row+i > 7) continue;
+        if(grid[i][col-row+i] == 'X'){
+            return;
+        }
+    }
+    
+    // Attacking from secondary diagonal
+    for(int i = 0; i < 8; i++){
+        if(col+row-i < 0 || col+row-i > 7) continue;
+        if(grid[i][col+row-i] == 'X'){
+            return;
         }
     }
 
-    wrongs/=2;
-    cout << totalWays - wrongs << "\n";
+    // Possible way
+    if(row == 7) {
+        ways++;
+        return;
+    }
+    
+/*
+00 01 02 03 04 05 06 07
+10 11 12 13 14 15 16 17
+20 21 22 23 24 25 26 27
+30 31 32 33 34 35 36 37
+40 41 42 43 44 45 46 47
+50 51 52 53 54 55 56 57
+60 61 62 63 64 65 66 67
+70 71 72 73 74 75 76 77
+*/
+
+    grid[row][col] = 'X';
+    for(int i = 0; i < 8; i++){
+        placeOn(row+1, i);
+    }
+    grid[row][col] = '.';
+}
+
+void solve(){
+    for(int i = 0; i < 8; i++) cin >> grid[i];
+    for(int i = 0; i < 8; i++) placeOn(0, i);
+
+    cout << ways << "\n";
 }
 
 int main(){
